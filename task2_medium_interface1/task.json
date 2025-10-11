@@ -1,0 +1,277 @@
+{
+  "env": "fund_finance",
+  "model_provider": "fireworks",
+  "model": "qwen3-coder-480b-a35b-instruct",
+  "num_trials": 3,
+  "temperature": 1,
+  "interface_num": 1,
+  "task": {
+    "user_id": "24",
+    "instruction": "You are Douglas Taylor, a Compliance Officer. You want to update the daily market valuation for the bond issued by Kennedy Jackson and Williams Group, ensuring the figures for October 10, 2025 accurately reflect verified market performance approved by Fund Manager Lydia Trujillo. Furthermore, you want the revised price record to be reflected in the firm’s financial reporting system for that date. You also want to have this valuation event documented for audit and compliance verification to maintain data integrity and transparency.",
+    "actions": [
+                  {
+                  "name": "discover_user_entities",
+                  "arguments": {
+                    "entity_type": "users",
+                    "filters": {
+                      "first_name": "Douglas",
+                      "last_name": "Taylor"
+                    }
+                  },
+                  "output": {
+                    "count": 1,
+                    "entity_type": "users",
+                    "results": [
+                      {
+                        "created_at": "2025-01-05T04:33:49",
+                        "email": "dtaylor@gmail.com",
+                        "first_name": "Douglas",
+                        "last_name": "Taylor",
+                        "role": "compliance_officer",
+                        "status": "active",
+                        "timezone": "UTC",
+                        "updated_at": "2025-08-02T12:11:45",
+                        "user_id": "24"
+                      }
+                    ],
+                    "success": true
+                  }
+                },
+                {
+                  "name": "discover_user_entities",
+                  "arguments": {
+                    "entity_type": "users",
+                    "filters": {
+                      "first_name": "Lydia",
+                      "last_name": "Trujillo"
+                    }
+                  },
+                  "output": {
+                    "count": 1,
+                    "entity_type": "users",
+                    "results": [
+                      {
+                        "created_at": "2024-05-01T07:45:00",
+                        "email": "lydia.trujillo@gmail.com",
+                        "first_name": "Lydia",
+                        "last_name": "Trujillo",
+                        "role": "fund_manager",
+                        "status": "active",
+                        "timezone": "Asia/Tokyo",
+                        "updated_at": "2024-11-25T06:48:06",
+                        "user_id": "21"
+                      }
+                    ],
+                    "success": true
+                  }
+                },
+                {
+                  "name": "approval_lookup",
+                  "arguments": {
+                    "action": "instrument_price_updates",
+                    "requester_email": "dtaylor@gmail.com"
+                  },
+                  "output": {
+                    "approval_valid": true,
+                    "approved_by": [
+                      "fund_manager",
+                      "compliance_officer"
+                    ]
+                  }
+                },
+                {
+                  "name": "discover_instrument_entities",
+                  "arguments": {
+                    "entity_type": "instruments",
+                    "filters": {
+                      "name": "Kennedy Jackson and Williams Group"
+                    }
+                  },
+                  "output": {
+                    "count": 1,
+                    "entity_type": "instruments",
+                    "results": [
+                      {
+                        "instrument_id": "3",
+                        "instrument_type": "bonds",
+                        "name": "Kennedy Jackson and Williams Group",
+                        "status": "active",
+                        "ticker": "HTB8"
+                      }
+                    ],
+                    "success": true
+                  }
+                },
+                {
+                  "name": "discover_valuation_entities",
+                  "arguments": {
+                    "entity_type": "instrument_prices",
+                    "filters": {
+                      "price_date": "2025-10-10",
+
+                      "instrument_id": "3"
+
+                    }
+                  },
+                  "output": {
+                    "count": 0,
+                    "entity_type": "instrument_prices",
+                    "results": [],
+                    "success": true
+                  }
+                },
+                {
+                  "name": "manage_instrument_price",
+                  "arguments": {
+                    "action": "create",
+                    "price_data": {
+                      "instrument_id": "3",
+                      "price_date": "2025-10-10",
+                      "open_price": 478.55,
+                      "high_price": 485.2,
+                      "low_price": 470,
+                      "close_price": 482.65,
+                      "fund_manager_approval": true,
+                      "compliance_officer_approval": true
+                    }
+                  },
+                  "output": {
+                    "action": "create",
+                    "message": "Instrument price 2478 created successfully for instrument 3 on 2025-10-10",
+                    "price_data": {
+                      "close_price": 482.65,
+                      "high_price": 485.2,
+                      "instrument_id": "3",
+                      "low_price": 470,
+                      "open_price": 478.55,
+                      "price_date": "2025-10-10",
+                      "price_id": "2478"
+                    },
+                    "price_id": "2478",
+                    "success": true
+                  }
+                },
+                {
+                  "name": "manage_notifications",
+                  "arguments": {
+                    "action": "create",
+                    "notification_data": {
+                      "email": "dtaylor@gmail.com",
+                      "type": "alert",
+                      "class": "trades",
+                      "status": "sent"
+                    }
+                  },
+                  "output": {
+                    "action": "create",
+                    "message": "Notification 1501 created successfully for dtaylor@gmail.com",
+                    "notification_data": {
+                      "class": "trades",
+                      "created_at": "2025-10-01T12:00:00",
+                      "email": "dtaylor@gmail.com",
+                      "notification_id": "1501",
+                      "reference_id": null,
+                      "sent_at": null,
+                      "status": "sent",
+                      "type": "alert"
+                    },
+                    "notification_id": "1501",
+                    "success": true
+                  }
+                }
+     ],
+    "outputs": ["HTB8", "2478","1501"],
+    "edges": [ 
+            {
+              "from": "instruction",
+              "to": "discover_user_entities",
+              "connection": {
+                "output": "entity_type, filters.first_name, filters.last_name",
+                "input": "entity_type, filters.first_name, filters.last_name"
+              }
+            },
+            {
+              "from": "instruction",
+              "to": "discover_user_entities",
+              "connection": {
+                "output": "entity_type, filters.first_name, filters.last_name",
+                "input": "entity_type, filters.first_name, filters.last_name"
+              }
+            },
+            {
+              "from": "discover_user_entities",
+              "to": "approval_lookup",
+              "connection": {
+                "output": "entity_type, results[0].email",
+                "input": "entity_type, requester_email"
+              }
+            },
+            {
+              "from": "instruction",
+              "to": "discover_instrument_entities",
+              "connection": {
+                "output": "entity_type, filters.name",
+                "input": "entity_type, filters.name"
+              }
+            },
+            {
+              "from": "discover_instrument_entities",
+              "to": "discover_valuation_entities",
+              "connection": {
+                "output": "results[0].instrument_id",
+                "input": "filters.instrument_id"
+              }
+            },
+            {
+              "from": "instruction",
+              "to": "discover_valuation_entities",
+              "connection": {
+                "output": "entity_type, filters.price_date",
+                "input": "entity_type, filters.price_date"
+              }
+            },
+            {
+              "from": "discover_instrument_entities",
+              "to": "manage_instrument_price",
+              "connection": {
+                "output": "results[0].instrument_id",
+                "input": "price_data.instrument_id"
+              }
+            },
+            {
+              "from": "approval_lookup",
+              "to": "manage_instrument_price",
+              "connection": {
+                "output": "approved_by",
+                "input": "price_data[0].approval"
+              }
+            },
+            {
+              "from": "instruction",
+              "to": "manage_instrument_price",
+              "connection": {
+                "output": "action, price_data.price_date, price_data.open_price, price_data.high_price, price_data.low_price, price_data.close_price",
+                "input": "action, price_data.price_date, price_data.open_price, price_data.high_price, price_data.low_price, price_data.close_price"
+              }
+            },
+            {
+              "from": "discover_user_entities",
+              "to": "manage_notifications",
+              "connection": {
+                "output": "results[0].email",
+                "input": "notification_data.email"
+              }
+            },
+            {
+              "from": "instruction",
+              "to": "manage_notifications",
+              "connection": {
+                "output": "action, notification_data.type, notification_data.class, notification_data.status",
+                "input": "action, notification_data.type, notification_data.class, notification_data.status"
+              }
+            }
+     ],
+    "num_edges": 11
+          }
+}
+
