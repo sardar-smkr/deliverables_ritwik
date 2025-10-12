@@ -3,7 +3,7 @@
 
 Legacy results directory does not exist
 
-Task result file: week_11_new\ritwik_pod\khizar-fund_finance-1-medium-1760025483\result.json (35697 bytes)
+Task result file: week_11_new\ritwik_pod\khizar-fund_finance-1-hard-1760025483\result.json (35697 bytes)
 === DETAILED ERROR ANALYSIS ===
 
 === ALL FAULT ASSIGNMENTS (1 total) ===
