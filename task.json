@@ -6,272 +6,310 @@
   "temperature": 1,
   "interface_num": 1,
   "task": {
-    "user_id": "24",
-    "instruction": "You are Douglas Taylor, a Compliance Officer. You want to update the daily market valuation for the bond issued by Kennedy Jackson and Williams Group, ensuring the figures for October 10, 2025 accurately reflect verified market performance approved by Fund Manager Lydia Trujillo. Furthermore, you want the revised price record to be reflected in the firm’s financial reporting system for that date. You also want to have this valuation event documented for audit and compliance verification to maintain data integrity and transparency.",
+    "user_id": "4",
+    "instruction": "You are Anthony Robinson, a Fund Manager for the Perry LLC Strategic Fund. You want to create a subscription for White Inc. with an amount of $591,046.06. The subscription needs approval from both you and the Compliance Officer, Danielle Johnson. Additionally, You  want to generate a performance report for White Inc. and send notifications and make audit.confirming the successful transaction to both the investor and the Fund Manager.",
     "actions": [
+                    {
+                    "name": "discover_user_entities",
+                    "arguments": {
+                      "entity_type": "users",
+                      "filters": {
+                        "first_name": "Anthony",
+                        "last_name": "Robinson",
+                        "role": "fund_manager"
+                      }
+                    },
+                    "output": {
+                      "count": 1,
+                      "entity_type": "users",
+                      "results": [
+                        {
+                          "created_at": "2024-10-10T04:15:12",
+                          "email": "anthonyrobinson734@outlook.com",
+                          "first_name": "Anthony",
+                          "last_name": "Robinson",
+                          "role": "fund_manager",
+                          "status": "active",
+                          "timezone": "America/Los_Angeles",
+                          "updated_at": "2025-05-31T23:28:28",
+                          "user_id": "4"
+                        }
+                      ],
+                      "success": true
+                    }
+                  },
                   {
-                  "name": "discover_user_entities",
-                  "arguments": {
-                    "entity_type": "users",
-                    "filters": {
-                      "first_name": "Douglas",
-                      "last_name": "Taylor"
-                    }
-                  },
-                  "output": {
-                    "count": 1,
-                    "entity_type": "users",
-                    "results": [
-                      {
-                        "created_at": "2025-01-05T04:33:49",
-                        "email": "dtaylor@gmail.com",
-                        "first_name": "Douglas",
-                        "last_name": "Taylor",
-                        "role": "compliance_officer",
-                        "status": "active",
-                        "timezone": "UTC",
-                        "updated_at": "2025-08-02T12:11:45",
-                        "user_id": "24"
+                    "name": "discover_user_entities",
+                    "arguments": {
+                      "entity_type": "users",
+                      "filters": {
+                        "first_name": "Danielle",
+                        "last_name": "Johnson",
+                        "role": "compliance_officer"
                       }
-                    ],
-                    "success": true
-                  }
-                },
-                {
-                  "name": "discover_user_entities",
-                  "arguments": {
-                    "entity_type": "users",
-                    "filters": {
-                      "first_name": "Lydia",
-                      "last_name": "Trujillo"
-                    }
-                  },
-                  "output": {
-                    "count": 1,
-                    "entity_type": "users",
-                    "results": [
-                      {
-                        "created_at": "2024-05-01T07:45:00",
-                        "email": "lydia.trujillo@gmail.com",
-                        "first_name": "Lydia",
-                        "last_name": "Trujillo",
-                        "role": "fund_manager",
-                        "status": "active",
-                        "timezone": "Asia/Tokyo",
-                        "updated_at": "2024-11-25T06:48:06",
-                        "user_id": "21"
-                      }
-                    ],
-                    "success": true
-                  }
-                },
-                {
-                  "name": "approval_lookup",
-                  "arguments": {
-                    "action": "instrument_price_updates",
-                    "requester_email": "dtaylor@gmail.com"
-                  },
-                  "output": {
-                    "approval_valid": true,
-                    "approved_by": [
-                      "fund_manager",
-                      "compliance_officer"
-                    ]
-                  }
-                },
-                {
-                  "name": "discover_instrument_entities",
-                  "arguments": {
-                    "entity_type": "instruments",
-                    "filters": {
-                      "name": "Kennedy Jackson and Williams Group"
-                    }
-                  },
-                  "output": {
-                    "count": 1,
-                    "entity_type": "instruments",
-                    "results": [
-                      {
-                        "instrument_id": "3",
-                        "instrument_type": "bonds",
-                        "name": "Kennedy Jackson and Williams Group",
-                        "status": "active",
-                        "ticker": "HTB8"
-                      }
-                    ],
-                    "success": true
-                  }
-                },
-                {
-                  "name": "discover_valuation_entities",
-                  "arguments": {
-                    "entity_type": "instrument_prices",
-                    "filters": {
-                      "price_date": "2025-10-10",
-
-                      "instrument_id": "3"
-
-                    }
-                  },
-                  "output": {
-                    "count": 0,
-                    "entity_type": "instrument_prices",
-                    "results": [],
-                    "success": true
-                  }
-                },
-                {
-                  "name": "manage_instrument_price",
-                  "arguments": {
-                    "action": "create",
-                    "price_data": {
-                      "instrument_id": "3",
-                      "price_date": "2025-10-10",
-                      "open_price": 478.55,
-                      "high_price": 485.2,
-                      "low_price": 470,
-                      "close_price": 482.65,
-                      "fund_manager_approval": true,
-                      "compliance_officer_approval": true
-                    }
-                  },
-                  "output": {
-                    "action": "create",
-                    "message": "Instrument price 2478 created successfully for instrument 3 on 2025-10-10",
-                    "price_data": {
-                      "close_price": 482.65,
-                      "high_price": 485.2,
-                      "instrument_id": "3",
-                      "low_price": 470,
-                      "open_price": 478.55,
-                      "price_date": "2025-10-10",
-                      "price_id": "2478"
                     },
-                    "price_id": "2478",
-                    "success": true
+                    "output": {
+                      "count": 1,
+                      "entity_type": "users",
+                      "results": [
+                        {
+                          "created_at": "2023-10-18T09:04:44",
+                          "email": "danielle.johnson@investment.com",
+                          "first_name": "Danielle",
+                          "last_name": "Johnson",
+                          "role": "compliance_officer",
+                          "status": "active",
+                          "timezone": "America/New_York",
+                          "updated_at": "2024-04-25T14:11:38",
+                          "user_id": "1"
+                        }
+                      ],
+                      "success": true
+                    }
+                  },
+                  {
+                    "name": "discover_investor_entities",
+                    "arguments": {
+                      "entity_type": "investors",
+                      "filters": {
+                        "name": "White Inc"
+                      }
+                    },
+                    "output": {
+                      "count": 1,
+                      "entity_type": "investors",
+                      "results": [
+                        {
+                          "accreditation_status": "accredited",
+                          "address": "26111 Kelley Burg, Warrenland, CT 34901",
+                          "contact_email": "white842@investment.com",
+                          "country": "France",
+                          "created_at": "2023-02-26T15:47:18",
+                          "date_of_incorporation": "2003-08-09",
+                          "investor_id": "136",
+                          "name": "White Inc",
+                          "registration_number": 781539680,
+                          "source_of_funds": "other",
+                          "status": "onboarded",
+                          "tax_id": "921-64-3347"
+                        }
+                      ],
+                      "success": true
+                    }
+                  },
+                  {
+                    "name": "discover_fund_entities",
+                    "arguments": {
+                      "entity_type": "funds",
+                      "filters": {
+                        "name": "Perry LLC Strategic Fund"
+                      }
+                    },
+                    "output": {
+                      "count": 1,
+                      "entity_type": "funds",
+                      "results": [
+                        {
+                          "created_at": "2023-04-11T12:14:09",
+                          "fund_id": "8",
+                          "fund_type": "exchange_traded_funds",
+                          "manager_id": "123",
+                          "name": "Perry LLC Strategic Fund",
+                          "size": 345391613.52,
+                          "status": "open",
+                          "updated_at": "2024-03-08T20:58:38"
+                        }
+                      ],
+                      "success": true
+                    }
+                  },
+                  {
+                    "name": "approval_lookup",
+                    "arguments": {
+                      "action": "subscription_management",
+                      "requester_email": "anthonyrobinson734@outlook.com"
+                    },
+                    "output": {
+                      "approval_valid": true,
+                      "message": "Role 'fund_manager' is directly authorized for action 'subscription_management'"
+                    }
+                  },
+                  {
+                    "name": "approval_lookup",
+                    "arguments": {
+                      "action": "subscription_management",
+                      "requester_email": "danielle.johnson@investment.com"
+                    },
+                    "output": {
+                      "approval_valid": true,
+                      "message": "Role 'compliance_officer' is directly authorized for action 'subscription_management'"
+                    }
+                  },
+                  {
+                    "name": "manage_subscription",
+                    "arguments": {
+                      "action": "create",
+                      "subscription_data": {
+                        "investor_id": "136",
+                        "fund_id": "8",
+                        "amount": 591046.06,
+                        "request_assigned_to": "4",
+                        "request_date": "2025-10-01",
+                        "fund_manager_approval": true,
+                        "compliance_officer_approval": true
+                      }
+                    },
+                    "output": {
+                      "action": "create",
+                      "message": "Subscription 2501 created successfully.",
+                      "subscription_data": {
+                        "amount": 591046.06,
+                        "approval_date": null,
+                        "fund_id": "8",
+                        "investor_id": "136",
+                        "request_assigned_to": "4",
+                        "request_date": "2025-10-01",
+                        "status": "pending",
+                        "subscription_id": "2501",
+                        "updated_at": "2025-10-01T00:00:00"
+                      },
+                      "subscription_id": "2501",
+                      "success": true
+                    }
+                  },
+                  {
+                    "name": "manage_notifications",
+                    "arguments": {
+                      "action": "create",
+                      "notification_data": {
+                        "email": "white842@investment.com",
+                        "type": "alert",
+                        "class": "subscriptions",
+                        "status": "sent"
+                      }
+                    },
+                    "output": {
+                      "action": "create",
+                      "message": "Notification 1505 created successfully for white842@investment.com",
+                      "notification_data": {
+                        "class": "subscriptions",
+                        "created_at": "2025-10-01T12:00:00",
+                        "email": "white842@investment.com",
+                        "notification_id": "1505",
+                        "reference_id": null,
+                        "sent_at": null,
+                        "status": "sent",
+                        "type": "alert"
+                      },
+                      "notification_id": "1505",
+                      "success": true
+                    }
+                  },
+                  {
+                    "name": "create_new_audit_trail",
+                    "arguments": {
+                      "action": "create",
+                      "reference_id": "2501",
+                      "reference_type": "subscription"
+                    },
+                    "output": {
+                      "action": "create",
+                      "audit_trail_id": "3501",
+                      "created_at": "2025-10-01T00:00:00",
+                      "field_name": null,
+                      "new_value": null,
+                      "old_value": null,
+                      "reference_id": "2501",
+                      "reference_type": "subscription"
+                    }
+                  }
+     ],
+    "outputs": [ "678","1002", "1501"],
+    "edges": [
+                  {
+                  "from": "instruction",
+                  "to": "discover_user_entities",
+                  "connection": {
+                    "output": "entity_type,first_name, last_name, role",
+                    "input": "entity_type,filters.first_name, filters.last_name, filters.role"
+                  }
+                },
+                
+                {
+                  "from": "instruction",
+                  "to": "discover_investor_entities",
+                  "connection": {
+                    "output": "entity_type,name",
+                    "input": "entity_type,filters.name"
+                  }
+                },
+                
+                {
+                  "from": "instruction",
+                  "to": "discover_fund_entities",
+                  "connection": {
+                    "output": "entity_type,name",
+                    "input": "entity_type,filters.name"
                   }
                 },
                 {
-                  "name": "manage_notifications",
-                  "arguments": {
-                    "action": "create",
-                    "notification_data": {
-                      "email": "dtaylor@gmail.com",
-                      "type": "alert",
-                      "class": "trades",
-                      "status": "sent"
-                    }
-                  },
-                  "output": {
-                    "action": "create",
-                    "message": "Notification 1501 created successfully for dtaylor@gmail.com",
-                    "notification_data": {
-                      "class": "trades",
-                      "created_at": "2025-10-01T12:00:00",
-                      "email": "dtaylor@gmail.com",
-                      "notification_id": "1501",
-                      "reference_id": null,
-                      "sent_at": null,
-                      "status": "sent",
-                      "type": "alert"
-                    },
-                    "notification_id": "1501",
-                    "success": true
+                  "from": "discover_user_entities",
+                  "to": "approval_lookup",
+                  "connection": {
+                    "output": "results[0].email",
+                    "input": "email"
+                  }
+                },
+                {
+                  "from": "instruction",
+                  "to": "approval_lookup",
+                  "connection": {
+                    "output": "action",
+                    "input": "action"
+                  }
+                },
+                {
+                  "from": "approval_lookup",
+                  "to": "manage_subscription",
+                  "connection": {
+                    "output": "approval_valid,approval_valid",
+                    "input": "fund_manager_approval,compliance_officer_approval"
+                  }
+                },
+                {
+                  "from": "discover_investor_entities",
+                  "to": "manage_subscription",
+                  "connection": {
+                    "output": "results[0].investor_id",
+                    "input": "subscription_data.investor_id"
+                  }
+                },
+                {
+                  "from": "discover_fund_entities",
+                  "to": "manage_subscription",
+                  "connection": {
+                    "output": "results[0].fund_id",
+                    "input": "subscription_data.fund_id"
+                  }
+                },
+                {
+                  "from": "instruction",
+                  "to": "manage_subscription",
+                  "connection": {
+                    "output": "amount, request_assigned_to, request_date, fund_manager_approval, compliance_officer_approval",
+                    "input": "subscription_data.amount, subscription_data.request_assigned_to, subscription_data.request_date, subscription_data.fund_manager_approval, subscription_data.compliance_officer_approval"
+                  }
+                },
+                
+                {
+                  "from": "manage_subscription",
+                  "to": "create_new_audit_trail",
+                  "connection": {
+                    "output": "subscription_data.subscription_id",
+                    "input": "reference_id"
                   }
                 }
      ],
-    "outputs": ["HTB8", "2478","1501"],
-    "edges": [ 
-            {
-              "from": "instruction",
-              "to": "discover_user_entities",
-              "connection": {
-                "output": "entity_type, filters.first_name, filters.last_name",
-                "input": "entity_type, filters.first_name, filters.last_name"
-              }
-            },
-            {
-              "from": "instruction",
-              "to": "discover_user_entities",
-              "connection": {
-                "output": "entity_type, filters.first_name, filters.last_name",
-                "input": "entity_type, filters.first_name, filters.last_name"
-              }
-            },
-            {
-              "from": "discover_user_entities",
-              "to": "approval_lookup",
-              "connection": {
-                "output": "entity_type, results[0].email",
-                "input": "entity_type, requester_email"
-              }
-            },
-            {
-              "from": "instruction",
-              "to": "discover_instrument_entities",
-              "connection": {
-                "output": "entity_type, filters.name",
-                "input": "entity_type, filters.name"
-              }
-            },
-            {
-              "from": "discover_instrument_entities",
-              "to": "discover_valuation_entities",
-              "connection": {
-                "output": "results[0].instrument_id",
-                "input": "filters.instrument_id"
-              }
-            },
-            {
-              "from": "instruction",
-              "to": "discover_valuation_entities",
-              "connection": {
-                "output": "entity_type, filters.price_date",
-                "input": "entity_type, filters.price_date"
-              }
-            },
-            {
-              "from": "discover_instrument_entities",
-              "to": "manage_instrument_price",
-              "connection": {
-                "output": "results[0].instrument_id",
-                "input": "price_data.instrument_id"
-              }
-            },
-            {
-              "from": "approval_lookup",
-              "to": "manage_instrument_price",
-              "connection": {
-                "output": "approved_by",
-                "input": "price_data[0].approval"
-              }
-            },
-            {
-              "from": "instruction",
-              "to": "manage_instrument_price",
-              "connection": {
-                "output": "action, price_data.price_date, price_data.open_price, price_data.high_price, price_data.low_price, price_data.close_price",
-                "input": "action, price_data.price_date, price_data.open_price, price_data.high_price, price_data.low_price, price_data.close_price"
-              }
-            },
-            {
-              "from": "discover_user_entities",
-              "to": "manage_notifications",
-              "connection": {
-                "output": "results[0].email",
-                "input": "notification_data.email"
-              }
-            },
-            {
-              "from": "instruction",
-              "to": "manage_notifications",
-              "connection": {
-                "output": "action, notification_data.type, notification_data.class, notification_data.status",
-                "input": "action, notification_data.type, notification_data.class, notification_data.status"
-              }
-            }
-     ],
-    "num_edges": 11
+    "num_edges": 10
           }
 }
-
