@@ -1,0 +1,267 @@
+{
+  "env": "fund_finance",
+  "model_provider": "fireworks",
+  "model": "qwen3-coder-480b-a35b-instruct",
+  "num_trials": 3,
+  "temperature": 1,
+  "interface_num": 1,
+  "task": {
+    "user_id": "63",
+    "instruction": "You are Heather Cross, a Fund Manager for the Day and Sons Strategic Fund. You are selling 10,000 shares of Cooper Inc Corp (JTB6) per unit price of 105 and transferring the proceeds to the Diversified Growth Fund. Furthermore, You want to ensure that the transaction is executed after Compliance Officer Brian Romero's approval and the Fund Manager's approval is confirmed.",
+    "actions": [
+                  {
+                  "name": "discover_user_entities",
+                  "arguments": {
+                    "entity_type": "users",
+                    "filters": {
+                      "first_name": "Heather",
+                      "last_name": "Cross",
+                      "role": "fund_manager"
+                    }
+                  },
+                  "output": {
+                    "count": 1,
+                    "entity_type": "users",
+                    "results": [
+                      {
+                        "created_at": "2024-12-27T11:47:15",
+                        "email": "hcross@outlook.com",
+                        "first_name": "Heather",
+                        "last_name": "Cross",
+                        "role": "fund_manager",
+                        "status": "active",
+                        "timezone": "Asia/Tokyo",
+                        "updated_at": "2025-07-04T11:53:37",
+                        "user_id": "63"
+                      }
+                    ],
+                    "success": true
+                  }
+                },
+                {
+                  "name": "discover_user_entities",
+                  "arguments": {
+                    "entity_type": "users",
+                    "filters": {
+                      "first_name": "Brian",
+                      "last_name": "Romero",
+                      "role": "compliance_officer"
+                    }
+                  },
+                  "output": {
+                    "count": 1,
+                    "entity_type": "users",
+                    "results": [
+                      {
+                        "created_at": "2023-06-01T19:17:58",
+                        "email": "brian.romero@yahoo.com",
+                        "first_name": "Brian",
+                        "last_name": "Romero",
+                        "role": "compliance_officer",
+                        "status": "active",
+                        "timezone": "America/New_York",
+                        "updated_at": "2023-09-16T05:57:35",
+                        "user_id": "67"
+                      }
+                    ],
+                    "success": true
+                  }
+                },
+                {
+                  "name": "discover_fund_entities",
+                  "arguments": {
+                    "entity_type": "funds",
+                    "filters": {
+                      "name": "Day and Sons Strategic Fund"
+                    }
+                  },
+                  "output": {
+                    "count": 1,
+                    "entity_type": "funds",
+                    "results": [
+                      {
+                        "created_at": "2025-01-09T21:18:03",
+                        "fund_id": "16",
+                        "fund_type": "exchange_traded_funds",
+                        "manager_id": "108",
+                        "name": "Day and Sons Strategic Fund",
+                        "size": 343539058.11,
+                        "status": "open",
+                        "updated_at": "2025-01-20T09:54:36"
+                      }
+                    ],
+                    "success": true
+                  }
+                },
+                {
+                  "name": "discover_instrument_entities",
+                  "arguments": {
+                    "entity_type": "instruments",
+                    "filters": {
+                      "ticker": "JTB6"
+                    }
+                  },
+                  "output": {
+                    "count": 1,
+                    "entity_type": "instruments",
+                    "results": [
+                      {
+                        "instrument_id": "13",
+                        "instrument_type": "bonds",
+                        "name": "Cooper Inc Corp",
+                        "status": "active",
+                        "ticker": "JTB6"
+                      }
+                    ],
+                    "success": true
+                  }
+                },
+                {
+                  "name": "approval_lookup",
+                  "arguments": {
+                    "action": "trade_execution",
+                    "requester_email": "hcross@outlook.com"
+                  },
+                  "output": {
+                    "approval_valid": true,
+                    "message": "Role 'fund_manager' is directly authorized for action 'trade_execution'"
+                  }
+                },
+                {
+                  "name": "approval_lookup",
+                  "arguments": {
+                    "action": "trade_execution",
+                    "requester_email": "brian.romero@yahoo.com"
+                  },
+                  "output": {
+                    "approval_valid": true,
+                    "approved_by": "fund_manager"
+                  }
+                },
+                {
+                  "name": "execute_trade",
+                  "arguments": {
+                    "fund_id": "16",
+                    "fund_manager_approval": true,
+                    "instrument_id": "13",
+                    "price": 105.0,
+                    "quantity": 10000.0,
+                    "side": "sell",
+                    "trade_date": "2025-10-01"
+                  },
+                  "output": {
+                    "message": "Trade 2501 executed successfully",
+                    "success": true,
+                    "trade_data": {
+                      "created_at": "2025-10-01T00:00:00",
+                      "fund_id": "16",
+                      "instrument_id": "13",
+                      "price": 105.0,
+                      "quantity": 10000.0,
+                      "side": "sell",
+                      "status": "executed",
+                      "trade_date": "2025-10-01",
+                      "trade_id": "2501"
+                    },
+                    "trade_id": "2501"
+                  }
+                },
+                {
+                  "name": "create_new_audit_trail",
+                  "arguments": {
+                    "action": "create",
+                    "reference_id": "2501",
+                    "reference_type": "trade"
+                  },
+                  "output": {
+                    "action": "create",
+                    "audit_trail_id": "3501",
+                    "created_at": "2025-10-01T00:00:00",
+                    "field_name": null,
+                    "new_value": null,
+                    "old_value": null,
+                    "reference_id": "2501",
+                    "reference_type": "trade"
+                  }
+                }
+     ],
+    "outputs": [ "2501","3501"],
+    "edges": [ 
+                {
+                "from": "instruction",
+                "to": "discover_user_entities",
+                "connection": {
+                  "output": "entity_type,first_name, last_name, role",
+                  "input": "entity_type,filters.first_name, filters.last_name, filters.role"
+                }
+              },
+              {
+                "from": "instruction",
+                "to": "approval_lookup",
+                "connection": {
+                  "output": "action",
+                  "input": "action"
+                }
+              },
+              {
+                "from": "discover_user_entities",
+                "to": "approval_lookup",
+                "connection": {
+                  "output": "results[0].email",
+                  "input": "requester_email"
+                }
+              },
+              {
+                "from": "approval_lookup",
+                "to": "execute_trade",
+                "connection": {
+                  "output": "approval_valid",
+                  "input": "fund_manager_approval"
+                }
+              },
+              {
+                "from": "discover_fund_entities",
+                "to": "execute_trade",
+                "connection": {
+                  "output": "results[0].fund_id",
+                  "input": "fund_id"
+                }
+              },
+
+              {
+                "from": "instruction",
+                "to": "discover_instrument_entities",
+                "connection": {
+                  "output": "entity_type,ticker",
+                  "input": "entity_type,ticker"
+                }
+              },
+
+              {
+                "from": "discover_instrument_entities",
+                "to": "execute_trade",
+                "connection": {
+                  "output": "results[0].instrument_id",
+                  "input": "instrument_id"
+                }
+              },
+              {
+                "from": "execute_trade",
+                "to": "create_new_audit_trail",
+                "connection": {
+                  "output": "trade_id",
+                  "input": "reference_id"
+                }
+              },
+              {
+                "from": "instruction",
+                "to": "create_new_audit_trail",
+                "connection": {
+                  "output": "action, reference_type",
+                  "input": "action, reference_type"
+                }
+              }
+    ],
+    "num_edges": 9
+          }
+}
