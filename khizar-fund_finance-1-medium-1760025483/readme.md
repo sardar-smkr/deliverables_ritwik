@@ -1,5 +1,5 @@
-<img width="11885" height="1733" alt="output" src="https://github.com/user-attachments/assets/a1e76c3d-eb6f-4284-81da-3da8a29361fc" />
 
+<img width="9515" height="2375" alt="output" src="https://github.com/user-attachments/assets/00366571-4a8e-4ebb-ac44-c6fbccb31b37" />
 
 Legacy results directory does not exist
 
