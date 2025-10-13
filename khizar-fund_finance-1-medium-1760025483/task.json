@@ -208,6 +208,25 @@
                     "notification_id": "1501",
                     "success": true
                   }
+
+                },
+                  {
+                  "name": "create_new_audit_trail",
+                  "arguments": {
+                    "action": "create",
+                    "reference_id": "1501",
+                    "reference_type": "notification"
+                  },
+                  "output": {
+                    "action": "create",
+                    "audit_trail_id": "3502",
+                    "created_at": "2025-10-01T00:00:00",
+                    "field_name": null,
+                    "new_value": null,
+                    "old_value": null,
+                    "reference_id": "1501",
+                    "reference_type": "notification"
+                  }
                 }
      ],
     "outputs": ["1002","1501","29" ],
@@ -316,10 +335,17 @@
                     "output": "action, type, class, status",
                     "input": "action, notification_data.type, notification_data.class, notification_data.status"
                   }
-                }
+                },
+                {
+              "from": "manage_notifications",
+              "to": "create_new_audit_trail",
+              "connection": {
+                "output": "notification_data.notification_id",
+                "input": "reference_id"
+              }}
 
     ],
-    "num_edges": 13
+    "num_edges": 14
           }
 }
 
