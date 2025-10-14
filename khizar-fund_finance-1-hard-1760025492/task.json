@@ -6,9 +6,37 @@
   "temperature": 1,
   "interface_num": 1,
   "task": {
-    "user_id": "48",
-    "instruction": "You are Brian Jones, a Fund Manager. You want to onboard a accredited investor, Greenwood Capital, having tax id number as '123-45-6789' , for contact you can use his email (greenwood.capital@yahoo.com) residing in 1234 Investment Lane, New York, NY 10001 (USA) ,Incorporation Date is 20 of May,2010 in shareholder capital by registration number of 123456789.0. Furthermore, you want to create a portfolio for them.  Finally, you want to notify registered investor.",
+    "user_id": "49",
+    "instruction": "You are Chad Young, a Compliance Officer. You want to onboard a accredited investor, Greenwood Capital, having tax id number as '123-45-6789' , for contact you can use his email (greenwood.capital@yahoo.com) residing in 1234 Investment Lane, New York, NY 10001 (USA) ,Incorporation Date is 20 of May,2010 in shareholder capital by registration number of 123456789.0. Furthermore, you want to create a portfolio through Brian Jones (fund manager)  for him.  Finally, you want to notify registered investor.",
     "actions": [
+                {
+                  "name": "discover_user_entities",
+                  "arguments": {
+                    "entity_type": "users",
+                    "filters": {
+                      "first_name": "Chad",
+                      "last_name": "Young"
+                    }
+                  },
+                  "output": {
+                    "count": 1,
+                    "entity_type": "users",
+                    "results": [
+                      {
+                        "created_at": "2025-06-21T08:32:31",
+                        "email": "chad.young@gmail.com",
+                        "first_name": "Chad",
+                        "last_name": "Young",
+                        "role": "compliance_officer",
+                        "status": "active",
+                        "timezone": "UTC",
+                        "updated_at": "2025-08-07T11:38:22",
+                        "user_id": "49"
+                      }
+                    ],
+                    "success": true
+                  }
+                },
                 {
                     "name": "discover_user_entities",
                     "arguments": {
@@ -37,15 +65,17 @@
                       "success": true
                     }
                   },
-                  {
+                  
+                  
+                    {
                     "name": "approval_lookup",
                     "arguments": {
                       "action": "investor_onboarding",
-                      "requester_email": "brianjones803@investment.com"
+                      "requester_email": "chad.young@gmail.com"
                     },
                     "output": {
                       "approval_valid": true,
-                      "approved_by": "compliance_officer"
+                      "message": "Role 'compliance_officer' is directly authorized for action 'investor_onboarding'"
                     }
                   },
                   {
@@ -90,6 +120,17 @@
                       "entity_type": "portfolios",
                       "results": [],
                       "success": true
+                    }
+                  },
+                    {
+                    "name": "approval_lookup",
+                    "arguments": {
+                      "action": "portfolio_creation",
+                      "requester_email": "brianjones803@investment.com"
+                    },
+                    "output": {
+                      "approval_valid": true,
+                      "approved_by": "Role 'fund_manager' is directly authorized for action 'portfolio_creation"
                     }
                   },
                   {
@@ -238,7 +279,7 @@
                 "input": "entity_type"
               }
             },
-           
+             
             {
               "from": "instruction",
               "to": "manage_portfolio",
