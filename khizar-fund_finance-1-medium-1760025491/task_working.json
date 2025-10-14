@@ -233,7 +233,7 @@
                 "to": "discover_instrument_entities",
                 "connection": {
                   "output": "entity_type,ticker",
-                  "input": "entity_type,filters.ticker"
+                  "input": "entity_type,filter.ticker"
                 }
               },
 
@@ -245,7 +245,14 @@
                   "input": "instrument_id"
                 }
               },
-              
+              {
+                "from": "instruction",
+                "to": "execute_trade",
+                "connection": {
+                  "output": "price,quantity,side,trade_date",
+                  "input": "price,quantity,side,trade_date"
+                }
+              },
               {
                 "from": "discover_fund_entities",
                 "to": "execute_trade",
@@ -273,7 +280,6 @@
               }
               
     ],
-    "num_edges": 10
+    "num_edges": 11
           }
 }
-
