@@ -195,6 +195,7 @@
                   "input": "entity_type,filters.first_name, filters.last_name, filters.role"
                 }
               },
+      (Missing the edge of this action discover_fund_entities)
               {
                 "from": "instruction",
                 "to": "approval_lookup",
@@ -228,6 +229,7 @@
                 }
               },
 
+    execute_trade is missing mutiple inputs as price, quantity, side, and trade_date) do not missed it, Kindlty make sure to map each and every edges. 
               {
                 "from": "instruction",
                 "to": "discover_instrument_entities",
@@ -235,7 +237,7 @@
                   "output": "entity_type,ticker",
                   "input": "entity_type,ticker"
                 }
-              },
+              },  ( This edge should come in sequential order, as it is executed before the execute_trade in action ) 
 
               {
                 "from": "discover_instrument_entities",
@@ -265,3 +267,4 @@
     "num_edges": 9
           }
 }
+
