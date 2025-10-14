@@ -233,7 +233,7 @@
                 "to": "discover_instrument_entities",
                 "connection": {
                   "output": "entity_type,ticker",
-                  "input": "entity_type,ticker"
+                  "input": "entity_type,filters.ticker"
                 }
               },
 
@@ -276,3 +276,4 @@
     "num_edges": 10
           }
 }
+
