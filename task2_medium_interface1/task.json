@@ -7,7 +7,7 @@
   "interface_num": 1,
   "task": {
     "user_id": "24",
-    "instruction": "You are Douglas Taylor, a Compliance Officer. You want to update the daily market valuation for the bond issued by Kennedy Jackson and Williams Group, ensuring the figures for October 10, 2025 accurately reflect verified market performance approved by Fund Manager Lydia Trujillo. Furthermore, you want the revised price record to be reflected in the firm’s financial reporting system for that date. You also want to have this valuation event documented for audit and compliance verification to maintain data integrity and transparency.",
+    "instruction": "You are Douglas Taylor, a Compliance Officer. You want to update the daily market valuation that is open price of 478.55 , high price of 485.2, low price of 470 and closing price of 482.65 for the bond issued by Kennedy Jackson and Williams Group, ensuring the figures for October 10, 2025 accurately reflect verified market performance approved by Fund Manager Lydia Trujillo. Furthermore, you want the revised price record to be reflected in the firm’s financial reporting system for that date. You want to send alert for trades having valuation event documented for audit and compliance verification to maintain data integrity and transparency.",
     "actions": [
                   {
                   "name": "discover_user_entities",
@@ -178,6 +178,24 @@
                     "notification_id": "1501",
                     "success": true
                   }
+                },
+                {
+                  "name": "create_new_audit_trail",
+                  "arguments": {
+                    "action": "create",
+                    "reference_id": "1501",
+                    "reference_type": "notification"
+                  },
+                  "output": {
+                    "action": "create",
+                    "audit_trail_id": "3502",
+                    "created_at": "2025-10-01T00:00:00",
+                    "field_name": null,
+                    "new_value": null,
+                    "old_value": null,
+                    "reference_id": "1501",
+                    "reference_type": "notification"
+                  }
                 }
      ],
     "outputs": ["HTB8", "2478","1501"],
@@ -186,31 +204,31 @@
               "from": "instruction",
               "to": "discover_user_entities",
               "connection": {
-                "output": "entity_type, filters.first_name, filters.last_name",
+                "output": "entity_type, first_name, last_name",
                 "input": "entity_type, filters.first_name, filters.last_name"
               }
             },
-            {
+             {
               "from": "instruction",
-              "to": "discover_user_entities",
+              "to": "approval_lookup",
               "connection": {
-                "output": "entity_type, filters.first_name, filters.last_name",
-                "input": "entity_type, filters.first_name, filters.last_name"
+                "output": " action",
+                "input": " action"
               }
             },
             {
               "from": "discover_user_entities",
               "to": "approval_lookup",
               "connection": {
-                "output": "entity_type, results[0].email",
-                "input": "entity_type, requester_email"
+                "output": " results[0].email",
+                "input": " requester_email"
               }
             },
             {
               "from": "instruction",
               "to": "discover_instrument_entities",
               "connection": {
-                "output": "entity_type, filters.name",
+                "output": "entity_type, name",
                 "input": "entity_type, filters.name"
               }
             },
@@ -226,11 +244,11 @@
               "from": "instruction",
               "to": "discover_valuation_entities",
               "connection": {
-                "output": "entity_type, filters.price_date",
+                "output": "entity_type, price_date",
                 "input": "entity_type, filters.price_date"
               }
             },
-            {
+            { 
               "from": "discover_instrument_entities",
               "to": "manage_instrument_price",
               "connection": {
@@ -242,15 +260,15 @@
               "from": "approval_lookup",
               "to": "manage_instrument_price",
               "connection": {
-                "output": "approved_by",
-                "input": "price_data[0].approval"
+                "output": "approval_valid,approval_valid",
+                "input": "price_data.fund_manager_approval, price_data.compliance_officer_approval"
               }
             },
             {
               "from": "instruction",
               "to": "manage_instrument_price",
               "connection": {
-                "output": "action, price_data.price_date, price_data.open_price, price_data.high_price, price_data.low_price, price_data.close_price",
+                "output": "action, price_date, open_price, high_price, low_price, close_price",
                 "input": "action, price_data.price_date, price_data.open_price, price_data.high_price, price_data.low_price, price_data.close_price"
               }
             },
@@ -266,12 +284,26 @@
               "from": "instruction",
               "to": "manage_notifications",
               "connection": {
-                "output": "action, notification_data.type, notification_data.class, notification_data.status",
+                "output": "action, type, class, status",
                 "input": "action, notification_data.type, notification_data.class, notification_data.status"
               }
-            }
+              
+            },
+            {
+              "from": "instruction",
+              "to": "create_new_audit_trail",
+              "connection": {
+                "output": "action,reference_type",
+                "input": "action,reference_type"
+              }},
+             {
+              "from": "manage_notifications",
+              "to": "create_new_audit_trail",
+              "connection": {
+                "output": "notification_data.notification_id",
+                "input": "reference_id"
+              }}
      ],
     "num_edges": 11
           }
 }
-
