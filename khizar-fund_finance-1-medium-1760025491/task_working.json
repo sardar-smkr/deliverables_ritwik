@@ -220,14 +220,14 @@
                 }
               },
               {
-                "from": "discover_fund_entities",
-                "to": "execute_trade",
+                "from": "instruction",
+                "to": "discover_fund_entities",
                 "connection": {
-                  "output": "results[0].fund_id",
-                  "input": "fund_id"
+                  "output": "entity_type,name",
+                  "input": "entity_type, filters.name"
                 }
               },
-
+              
               {
                 "from": "instruction",
                 "to": "discover_instrument_entities",
@@ -245,14 +245,16 @@
                   "input": "instrument_id"
                 }
               },
+              
               {
-                "from": "execute_trade",
-                "to": "create_new_audit_trail",
+                "from": "discover_fund_entities",
+                "to": "execute_trade",
                 "connection": {
-                  "output": "trade_id",
-                  "input": "reference_id"
+                  "output": "results[0].fund_id",
+                  "input": "fund_id"
                 }
               },
+
               {
                 "from": "instruction",
                 "to": "create_new_audit_trail",
@@ -260,8 +262,17 @@
                   "output": "action, reference_type",
                   "input": "action, reference_type"
                 }
+              },
+              {
+                "from": "execute_trade",
+                "to": "create_new_audit_trail",
+                "connection": {
+                  "output": "trade_id",
+                  "input": "reference_id"
+                }
               }
+              
     ],
-    "num_edges": 9
+    "num_edges": 10
           }
 }
