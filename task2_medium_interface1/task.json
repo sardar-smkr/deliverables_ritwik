@@ -228,6 +228,14 @@
             },
             
             {
+              "from": "instruction",
+              "to": "approval_lookup",
+              "connection": {
+                "output": "action",
+                "input": " action"
+              }
+            },
+            {
               "from": "discover_user_entities",
               "to": "approval_lookup",
               "connection": {
@@ -323,7 +331,7 @@
                 "input": "reference_id"
               }}
      ],
-    "num_edges": 13
+    "num_edges": 14
           }
           
 }
