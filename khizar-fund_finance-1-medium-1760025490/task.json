@@ -253,14 +253,6 @@
                   }
                 },
                 {
-                  "from": "discover_user_entities",
-                  "to": "approval_lookup",
-                  "connection": {
-                    "output": "results[0].email",
-                    "input": "email"
-                  }
-                },
-                {
                   "from": "instruction",
                   "to": "approval_lookup",
                   "connection": {
@@ -268,6 +260,15 @@
                     "input": "action"
                   }
                 },
+                {
+                  "from": "discover_user_entities",
+                  "to": "approval_lookup",
+                  "connection": {
+                    "output": "results[0].email",
+                    "input": "email"
+                  }
+                },
+                
                 {
                   "from": "approval_lookup",
                   "to": "manage_subscription",
@@ -300,13 +301,12 @@
                     "input": "subscription_data.amount, subscription_data.request_assigned_to, subscription_data.request_date"
                   }
                 },
-                
                 {
-                  "from": "manage_subscription",
-                  "to": "create_new_audit_trail",
+                  "from": "instruction",
+                  "to": "manage_notifications",
                   "connection": {
-                    "output": "subscription_data.subscription_id",
-                    "input": "reference_id"
+                    "output": "type,class,status",
+                    "input": "notification_data.type,notification_data.class,notification_data.status "
                   }
                 },
                 {
@@ -318,6 +318,15 @@
                   }
                 },
                 {
+                  "from": "manage_subscription",
+                  "to": "create_new_audit_trail",
+                  "connection": {
+                    "output": "subscription_data.subscription_id",
+                    "input": "reference_id"
+                  }
+                },
+                
+                {
                   "from": "instruction",
                   "to": "create_new_audit_trail",
                   "connection": {
@@ -326,6 +335,6 @@
                   }
                 }
      ],
-    "num_edges": 12
+    "num_edges": 13
           }
 }
