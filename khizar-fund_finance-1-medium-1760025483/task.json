@@ -9,225 +9,242 @@
     "user_id": "77",
     "instruction": "You are Eric Bass, a Finance Officer. You want to verify that the committed investment made by Hayes-Duncan, an accredited investor from France, into the Hogan PLC Income Fund has already been fulfilled, ensuring the transaction is properly reflected in financial reporting. Once verification is completed, you want to notify Paul Carlson in Compliance confirming that the fulfillment is recorded and reflected in reports for transparency.",
     "actions": [
-                  {
-                  "name": "discover_user_entities",
-                  "arguments": {
-                    "entity_type": "users",
-                    "filters": {
+              {
+                "name": "discover_user_entities",
+                "arguments": {
+                  "entity_type": "users",
+                  "filters": {
+                    "first_name": "Eric",
+                    "last_name": "Bass"
+                  }
+                },
+                "output": {
+                  "count": 1,
+                  "entity_type": "users",
+                  "results": [
+                    {
+                      "created_at": "2025-08-14T01:06:44",
+                      "email": "ebass@yahoo.com",
                       "first_name": "Eric",
-                      "last_name": "Bass"
+                      "last_name": "Bass",
+                      "role": "finance_officer",
+                      "status": "suspended",
+                      "timezone": "Europe/London",
+                      "updated_at": "2025-08-14T23:08:27",
+                      "user_id": "77"
                     }
-                  },
-                  "output": {
-                    "count": 1,
-                    "entity_type": "users",
-                    "results": [
-                      {
-                        "created_at": "2025-08-14T01:06:44",
-                        "email": "ebass@yahoo.com",
-                        "first_name": "Eric",
-                        "last_name": "Bass",
-                        "role": "finance_officer",
-                        "status": "suspended",
-                        "timezone": "Europe/London",
-                        "updated_at": "2025-08-14T23:08:27",
-                        "user_id": "77"
-                      }
-                    ],
-                    "success": true
-                  }
-                },
-                {
-                  "name": "discover_user_entities",
-                  "arguments": {
-                    "entity_type": "users",
-                    "filters": {
-                      "first_name": "Paul",
-                      "last_name": "Carlson"
-                    }
-                  },
-                  "output": {
-                    "count": 1,
-                    "entity_type": "users",
-                    "results": [
-                      {
-                        "created_at": "2024-08-13T05:24:26",
-                        "email": "pcarlson@gmail.com",
-                        "first_name": "Paul",
-                        "last_name": "Carlson",
-                        "role": "compliance_officer",
-                        "status": "active",
-                        "timezone": "America/New_York",
-                        "updated_at": "2025-03-06T17:06:37",
-                        "user_id": "29"
-                      }
-                    ],
-                    "success": true
-                  }
-                },
-                {
-                  "name": "approval_lookup",
-                  "arguments": {
-                    "action": "commitments_fulfill",
-                    "requester_email": "ebass@yahoo.com"
-                  },
-                  "output": {
-                    "approval_valid": true,
-                    "approved_by": "compliance_officer"
-                  }
-                },
-                {
-                  "name": "discover_investor_entities",
-                  "arguments": {
-                    "entity_type": "investors",
-                    "filters": {
-                      "name": "Hayes-Duncan"
-                    }
-                  },
-                  "output": {
-                    "count": 1,
-                    "entity_type": "investors",
-                    "results": [
-                      {
-                        "accreditation_status": "accredited",
-                        "address": "86632 Thomas Branch Apt. 672, Kristenport, KS 74181",
-                        "contact_email": "hayesduncan8722@finance.com",
-                        "country": "France",
-                        "created_at": "2025-01-27T00:47:59",
-                        "date_of_incorporation": "2003-05-26",
-                        "investor_id": "133",
-                        "name": "Hayes-Duncan",
-                        "registration_number": 736699683,
-                        "source_of_funds": "other",
-                        "status": "onboarded",
-                        "tax_id": "906-12-0347"
-                      }
-                    ],
-                    "success": true
-                  }
-                },
-                {
-                  "name": "discover_fund_entities",
-                  "arguments": {
-                    "entity_type": "funds",
-                    "filters": {
-                      "name": "Hogan PLC Income Fund"
-                    }
-                  },
-                  "output": {
-                    "count": 1,
-                    "entity_type": "funds",
-                    "results": [
-                      {
-                        "created_at": "2025-07-15T02:16:07",
-                        "fund_id": "29",
-                        "fund_type": "hedge_funds",
-                        "manager_id": "42",
-                        "name": "Hogan PLC Income Fund",
-                        "size": 250735616.38,
-                        "status": "open",
-                        "updated_at": "2025-08-13T05:47:55"
-                      }
-                    ],
-                    "success": true
-                  }
-                },
-                {
-                  "name": "discover_investment_flow_entities",
-                  "arguments": {
-                    "entity_type": "commitments",
-                    "filters": {
-                      "investor_id": "133",
-                      "fund_id": "29"
-                    }
-                  },
-                  "output": {
-                    "count": 1,
-                    "entity_type": "commitments",
-                    "results": [
-                      {
-                        "commitment_amount": 5724048.45,
-                        "commitment_date": "2024-11-06",
-                        "commitment_id": "66",
-                        "fund_id": "29",
-                        "investor_id": "133",
-                        "status": "fulfilled",
-                        "updated_at": "2024-11-15T16:00:32"
-                      }
-                    ],
-                    "success": true
-                  }
-                },
-                {
-                  "name": "generate_report",
-                  "arguments": {
-                    "export_period_end": "2025-10-10",
-                    "fund_id": "29",
-                    "generated_by": "77",
-                    "investor_id": "133",
-                    "report_date": "2025-10-10",
-                    "report_type": "financial",
-                    "status": "completed"
-                  },
-                  "output": {
-                    "created_at": "2025-10-01T00:00:00",
-                    "export_period_end": "2025-10-10",
-                    "fund_id": "29",
-                    "generated_by": "77",
-                    "investor_id": "133",
-                    "report_date": "2025-10-10",
-                    "report_id": "1002",
-                    "report_type": "financial",
-                    "status": "completed"
-                  }
-                },
-                {
-                  "name": "manage_notifications",
-                  "arguments": {
-                    "action": "create",
-                    "notification_data": {
-                      "email": "pcarlson@gmail.com",
-                      "type": "alert",
-                      "class": "commitments",
-                      "status": "sent"
-                    }
-                  },
-                  "output": {
-                    "action": "create",
-                    "message": "Notification 1501 created successfully for pcarlson@gmail.com",
-                    "notification_data": {
-                      "class": "commitments",
-                      "created_at": "2025-10-01T12:00:00",
-                      "email": "pcarlson@gmail.com",
-                      "notification_id": "1501",
-                      "reference_id": null,
-                      "sent_at": null,
-                      "status": "sent",
-                      "type": "alert"
-                    },
-                    "notification_id": "1501",
-                    "success": true
-                  }
-
-                },
-                  {
-                  "name": "create_new_audit_trail",
-                  "arguments": {
-                    "action": "create",
-                    "reference_id": "1501",
-                    "reference_type": "notification"
-                  },
-                  "output": {
-                    "action": "create",
-                    "audit_trail_id": "3502",
-                    "created_at": "2025-10-01T00:00:00",
-                    "field_name": null,
-                    "new_value": null,
-                    "old_value": null,
-                    "reference_id": "1501",
-                    "reference_type": "notification"
-                  }
+                  ],
+                  "success": true
                 }
+              },
+              {
+                "name": "discover_user_entities",
+                "arguments": {
+                  "entity_type": "users",
+                  "filters": {
+                    "first_name": "Paul",
+                    "last_name": "Carlson"
+                  }
+                },
+                "output": {
+                  "count": 1,
+                  "entity_type": "users",
+                  "results": [
+                    {
+                      "created_at": "2024-08-13T05:24:26",
+                      "email": "pcarlson@gmail.com",
+                      "first_name": "Paul",
+                      "last_name": "Carlson",
+                      "role": "compliance_officer",
+                      "status": "active",
+                      "timezone": "America/New_York",
+                      "updated_at": "2025-03-06T17:06:37",
+                      "user_id": "29"
+                    }
+                  ],
+                  "success": true
+                }
+              },
+              {
+                "name": "approval_lookup",
+                "arguments": {
+                  "action": "commitments_fulfill",
+                  "requester_email": "ebass@yahoo.com"
+                },
+                "output": {
+                  "approval_valid": true,
+                  "approved_by": "compliance_officer"
+                }
+              },
+              {
+                "name": "discover_investor_entities",
+                "arguments": {
+                  "entity_type": "investors",
+                  "filters": {
+                    "name": "Hayes-Duncan"
+                  }
+                },
+                "output": {
+                  "count": 1,
+                  "entity_type": "investors",
+                  "results": [
+                    {
+                      "accreditation_status": "accredited",
+                      "address": "86632 Thomas Branch Apt. 672, Kristenport, KS 74181",
+                      "contact_email": "hayesduncan8722@finance.com",
+                      "country": "France",
+                      "created_at": "2025-01-27T00:47:59",
+                      "date_of_incorporation": "2003-05-26",
+                      "investor_id": "133",
+                      "name": "Hayes-Duncan",
+                      "registration_number": 736699683,
+                      "source_of_funds": "other",
+                      "status": "onboarded",
+                      "tax_id": "906-12-0347"
+                    }
+                  ],
+                  "success": true
+                }
+              },
+              {
+                "name": "discover_fund_entities",
+                "arguments": {
+                  "entity_type": "funds",
+                  "filters": {
+                    "name": "Hogan PLC Income Fund"
+                  }
+                },
+                "output": {
+                  "count": 1,
+                  "entity_type": "funds",
+                  "results": [
+                    {
+                      "created_at": "2025-07-15T02:16:07",
+                      "fund_id": "29",
+                      "fund_type": "hedge_funds",
+                      "manager_id": "42",
+                      "name": "Hogan PLC Income Fund",
+                      "size": 250735616.38,
+                      "status": "open",
+                      "updated_at": "2025-08-13T05:47:55"
+                    }
+                  ],
+                  "success": true
+                }
+              },
+              {
+                "name": "discover_investment_flow_entities",
+                "arguments": {
+                  "entity_type": "commitments",
+                  "filters": {
+                    "investor_id": "133",
+                    "fund_id": "29"
+                  }
+                },
+                "output": {
+                  "count": 1,
+                  "entity_type": "commitments",
+                  "results": [
+                    {
+                      "commitment_amount": 5724048.45,
+                      "commitment_date": "2024-11-06",
+                      "commitment_id": "66",
+                      "fund_id": "29",
+                      "investor_id": "133",
+                      "status": "fulfilled",
+                      "updated_at": "2024-11-15T16:00:32"
+                    }
+                  ],
+                  "success": true
+                }
+              },
+              {
+                "name": "generate_report",
+                "arguments": {
+                  "export_period_end": "2025-10-10",
+                  "fund_id": "29",
+                  "generated_by": "77",
+                  "investor_id": "133",
+                  "report_date": "2025-10-10",
+                  "report_type": "financial",
+                  "status": "completed"
+                },
+                "output": {
+                  "created_at": "2025-10-01T00:00:00",
+                  "export_period_end": "2025-10-10",
+                  "fund_id": "29",
+                  "generated_by": "77",
+                  "investor_id": "133",
+                  "report_date": "2025-10-10",
+                  "report_id": "1001",
+                  "report_type": "financial",
+                  "status": "completed"
+                }
+              },
+              {
+                "name": "manage_notifications",
+                "arguments": {
+                  "action": "create",
+                  "notification_data": {
+                    "email": "pcarlson@gmail.com",
+                    "type": "alert",
+                    "class": "commitments",
+                    "status": "sent"
+                  }
+                },
+                "output": {
+                  "action": "create",
+                  "message": "Notification 1501 created successfully for pcarlson@gmail.com",
+                  "notification_data": {
+                    "class": "commitments",
+                    "created_at": "2025-10-01T12:00:00",
+                    "email": "pcarlson@gmail.com",
+                    "notification_id": "1501",
+                    "reference_id": null,
+                    "sent_at": null,
+                    "status": "sent",
+                    "type": "alert"
+                  },
+                  "notification_id": "1501",
+                  "success": true
+                }
+              },
+              {
+                "name": "create_new_audit_trail",
+                "arguments": {
+                  "action": "create",
+                  "reference_id": "1501",
+                  "reference_type": "notification"
+                },
+                "output": {
+                  "action": "create",
+                  "audit_trail_id": "3501",
+                  "created_at": "2025-10-01T00:00:00",
+                  "field_name": null,
+                  "new_value": null,
+                  "old_value": null,
+                  "reference_id": "1501",
+                  "reference_type": "notification"
+                }
+              },
+              {
+                "name": "create_new_audit_trail",
+                "arguments": {
+                  "action": "create",
+                  "reference_id": "1001",
+                  "reference_type": "report"
+                },
+                "output": {
+                  "action": "create",
+                  "audit_trail_id": "3502",
+                  "created_at": "2025-10-01T00:00:00",
+                  "field_name": null,
+                  "new_value": null,
+                  "old_value": null,
+                  "reference_id": "1001",
+                  "reference_type": "report"
+                }
+              }
      ],
     "outputs": ["1002","1501","29" ],
     "edges": [
@@ -345,16 +362,30 @@
                     "input": "action, notification_data.type, notification_data.class, notification_data.status"
                   }
                 },
-                {
-              "from": "manage_notifications",
-              "to": "create_new_audit_trail",
-              "connection": {
-                "output": "notification_data.notification_id",
-                "input": "reference_id"
-              }}
-
-    ],
-    "num_edges": 15
+               
+                  {
+                "from": "manage_notifications",
+                "to": "create_new_audit_trail",
+                "connection": {
+                  "output": "notification_data.notification_id",
+                  "input": "reference_id"
+                }},
+                 {
+                "from": "instruction",
+                "to": "create_new_audit_trail",
+                "connection": {
+                  "output": "action,reference_type",
+                  "input": "action,reference_type"
+                }},
+                 {
+                "from": "generate_report",
+                "to": "create_new_audit_trail",
+                "connection": {
+                  "output": "report_id",
+                  "input": "reference_type"
+                }}
+                ],
+    "num_edges": 17
           }
 }
 
