@@ -10,34 +10,34 @@
     "instruction": "You are Chad Young, a Compliance Officer. You want to onboard a accredited investor, Greenwood Capital, having tax id number as '123-45-6789' , for contact you can use his email (greenwood.capital@yahoo.com) residing in 1234 Investment Lane, New York, NY 10001 (USA) ,Incorporation Date is 20 of May,2010 in shareholder capital by registration number of 123456789.0. Furthermore, you want to create a portfolio through Brian Jones (fund manager)  for him.  Finally, you want to notify registered investor.",
     "actions": [
                 {
-                  "name": "discover_user_entities",
-                  "arguments": {
-                    "entity_type": "users",
-                    "filters": {
-                      "first_name": "Chad",
-                      "last_name": "Young"
+                    "name": "discover_user_entities",
+                    "arguments": {
+                      "entity_type": "users",
+                      "filters": {
+                        "first_name": "Chad",
+                        "last_name": "Young"
+                      }
+                    },
+                    "output": {
+                      "count": 1,
+                      "entity_type": "users",
+                      "results": [
+                        {
+                          "created_at": "2025-06-21T08:32:31",
+                          "email": "chad.young@gmail.com",
+                          "first_name": "Chad",
+                          "last_name": "Young",
+                          "role": "compliance_officer",
+                          "status": "active",
+                          "timezone": "UTC",
+                          "updated_at": "2025-08-07T11:38:22",
+                          "user_id": "49"
+                        }
+                      ],
+                      "success": true
                     }
                   },
-                  "output": {
-                    "count": 1,
-                    "entity_type": "users",
-                    "results": [
-                      {
-                        "created_at": "2025-06-21T08:32:31",
-                        "email": "chad.young@gmail.com",
-                        "first_name": "Chad",
-                        "last_name": "Young",
-                        "role": "compliance_officer",
-                        "status": "active",
-                        "timezone": "UTC",
-                        "updated_at": "2025-08-07T11:38:22",
-                        "user_id": "49"
-                      }
-                    ],
-                    "success": true
-                  }
-                },
-                {
+                  {
                     "name": "discover_user_entities",
                     "arguments": {
                       "entity_type": "users",
@@ -65,9 +65,7 @@
                       "success": true
                     }
                   },
-                  
-                  
-                    {
+                  {
                     "name": "approval_lookup",
                     "arguments": {
                       "action": "investor_onboarding",
@@ -90,7 +88,7 @@
                       "registered_address": "1234 Investment Lane, New York, NY 10001",
                       "registration_number": 123456789.0,
                       "source_of_funds": "shareholder_capital",
-                      "tax_id": "987-65-4321"
+                      "tax_id": "123-45-6789"
                     },
                     "output": {
                       "accreditation_status": "accredited",
@@ -104,7 +102,7 @@
                       "registration_number": 123456789.0,
                       "source_of_funds": "shareholder_capital",
                       "status": "onboarded",
-                      "tax_id": "987-65-4321"
+                      "tax_id": "123-45-6789"
                     }
                   },
                   {
@@ -122,7 +120,7 @@
                       "success": true
                     }
                   },
-                    {
+                  {
                     "name": "approval_lookup",
                     "arguments": {
                       "action": "portfolio_creation",
@@ -130,7 +128,7 @@
                     },
                     "output": {
                       "approval_valid": true,
-                      "approved_by": "Role 'fund_manager' is directly authorized for action 'portfolio_creation"
+                      "message": "Role 'fund_manager' is directly authorized for action 'portfolio_creation'"
                     }
                   },
                   {
@@ -147,7 +145,7 @@
                       "message": "Portfolio 176 created successfully for investor 176",
                       "portfolio_data": {
                         "created_at": "2025-10-01T12:00:00",
-                        "investor_id": "1001",
+                        "investor_id": "176",
                         "portfolio_id": "176",
                         "status": "active",
                         "updated_at": "2025-10-01T12:00:00"
@@ -216,7 +214,7 @@
                         "status": "sent",
                         "type": "alert"
                       },
-                      "notification_id": "1504",
+                      "notification_id": "1501",
                       "success": true
                     }
                   },
@@ -224,22 +222,22 @@
                     "name": "create_new_audit_trail",
                     "arguments": {
                       "action": "create",
-                      "reference_id": "1504",
-                      "reference_type": "Notification"
+                      "reference_id": "1501",
+                      "reference_type": "notification"
                     },
                     "output": {
                       "action": "create",
-                      "audit_trail_id": "3505",
+                      "audit_trail_id": "3503",
                       "created_at": "2025-10-01T00:00:00",
                       "field_name": null,
                       "new_value": null,
                       "old_value": null,
-                      "reference_id": null,
-                      "reference_type": "Notification"
+                      "reference_id": "1501",
+                      "reference_type": "notification"
                     }
                   }
      ],
-    "outputs": ["1501", "176","3502"],
+    "outputs": ["1501", "176","3503"],
     "edges": [
               {
               "from": "instruction",
@@ -313,7 +311,7 @@
                 "output": "investor_id",
                 "input": "portfolio_data.investor_id"
               }
-            },
+            }, 
              {
               "from": "approval_lookup",
               "to": "manage_portfolio",
