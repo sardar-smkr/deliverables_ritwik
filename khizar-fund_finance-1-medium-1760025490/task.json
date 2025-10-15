@@ -283,7 +283,7 @@
                   "to": "approval_lookup",
                   "connection": {
                     "output": "results[0].email",
-                    "input": "email"
+                    "input": "requester_email"
                   }
                 },
                 
@@ -292,7 +292,7 @@
                   "to": "manage_subscription",
                   "connection": {
                     "output": "approval_valid,approval_valid",
-                    "input": "fund_manager_approval,compliance_officer_approval"
+                    "input": "subscription_data.fund_manager_approval,subscription_data.compliance_officer_approval"
                   }
                 },
                 {
@@ -367,3 +367,4 @@
     "num_edges": 14
           }
 }
+
