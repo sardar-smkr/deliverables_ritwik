@@ -256,9 +256,18 @@
                     "input": "action"
                   }
                 },
+                
                 {
                   "from": "instruction",
                   "to": "discover_investor_entities",
+                  "connection": {
+                    "output": "entity_type, name",
+                    "input": "entity_type, filters.name"
+                  }
+                },
+                {
+                  "from": "instruction",
+                  "to": "discover_fund_entities",
                   "connection": {
                     "output": "entity_type, name",
                     "input": "entity_type, filters.name"
@@ -345,7 +354,7 @@
               }}
 
     ],
-    "num_edges": 14
+    "num_edges": 15
           }
 }
 
