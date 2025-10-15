@@ -1,0 +1,47 @@
+tax id number as '123-45-6789' in instruction but in action you are using "tax_id": "987-65-4321"
+{
+        "name": "manage_portfolio",
+        "arguments": {
+          "action": "create",
+          "portfolio_data": {
+            "investor_id": "176",
+            "fund_manager_approval": true
+          }
+        },
+        "output": {
+          "action": "create",
+          "message": "Portfolio 176 created successfully for investor 176",
+          "portfolio_data": {
+            "created_at": "2025-10-01T12:00:00",
+            "investor_id": "1001",           (investor_id should be 176 right ? why adding 1001 here )            
+"portfolio_id": "176",
+            "status": "active",
+            "updated_at": "2025-10-01T12:00:00"
+          },
+          "portfolio_id": "176",
+          "success": true
+        }
+      },
+{
+        "name": "approval_lookup",
+        "arguments": {
+          "action": "portfolio_creation",
+          "requester_email": "brianjones803@investment.com"
+        },
+        "output": {
+          "approval_valid": true,
+          "approved_by": "Role 'fund_manager' is directly authorized for action 'portfolio_creation" ( missed ' ) after portfolio_creation
+        }
+      },
+{
+        "name": "manage_notifications",
+        "arguments": {
+          "action": "create",
+          "notification_data": {
+            "email": "greenwood.capital123@yahoo.com",
+            "type": "alert",
+            "class": "investors",
+            "status": "sent"
+          }
+        },
+You did not add create_new_audit_trail after manage_notifcations i told it multiple time refer to the policy before creating action, we have to log an trial for this
